@@ -1,0 +1,24 @@
+{
+  "name": "hubot-gosu-hi",
+  "version": "1.0.0",
+  "description": "Hello script for GOSU",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://zGrav@github.com/zGrav/hubot-gosu-hi.git"
+  },
+  "keywords": [
+    "hubot",
+    "gosu",
+    "hi"
+  ],
+  "author": "David Silva <zgrav@go.su>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zGrav/hubot-gosu-hi/issues"
+  },
+  "homepage": "https://github.com/zGrav/hubot-gosu-hi#readme"
+}
