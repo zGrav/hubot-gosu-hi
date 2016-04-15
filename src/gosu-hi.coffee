@@ -13,8 +13,8 @@
 
 module.exports = (robot) ->
 
-    robot.respond /hi/i, (msg) ->
+    robot.hear /hi/i, (msg) ->
         msg.send "Hi and welcome to GOSU!"
 
-    robot.respond /hello/i, (msg) ->
+    robot.hear /hello/i, (msg) ->
         msg.send "Hello and welcome to GOSU!"
