@@ -18,15 +18,15 @@ module.exports = (robot) ->
     usrarr = [] if !usrarr?
 
     robot.hear /user_joined/i, (msg) ->
-        if usrarr.indexOf(msg.envelope.user.name) == -1
-            usrarr.push(msg.envelope.user.name)
+        if usrarr.indexOf(msg.envelope.user.id) == -1
+            usrarr.push(id: msg.envelope.user.id, join: true, leave: false)
             robot.brain.data["GOSU-hi-script"] = usrarr
             robot.brain.save()
             msg.send msg.random hiarr
 
     robot.hear /user_left/i, (msg) ->
-        if usrarr.indexOf(msg.envelope.user.name) == -1
-            usrarr.push(msg.envelope.user.name)
+        if usrarr.indexOf(msg.envelope.user.id) > -1
+            usrarr.push(id: msg.envelope.user.id, join: true, leave: true)
             robot.brain.data["GOSU-hi-script"] = usrarr
             robot.brain.save()
             msg.send msg.random byearr
