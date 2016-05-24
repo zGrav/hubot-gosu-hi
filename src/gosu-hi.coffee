@@ -47,7 +47,7 @@ module.exports = (robot) ->
 
     robot.hear /user_left/i, (msg) ->
         getidx = funcs.findKeyIndex(usrarr, 'id', msg.envelope.user.id)
-        if usrarr[getidx].leave === false
+        if usrarr[getidx].leave == false
             usrarr[getidx].leave = true
             robot.brain.data["GOSU-hi-script"] = usrarr
             robot.brain.save()
