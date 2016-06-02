@@ -39,7 +39,15 @@ module.exports = (robot) ->
     funcs = new Functions
 
     robot.hear /user_joined/i, (msg) ->
-        if funcs.searchArray(msg.envelope.user.id, usrarr) == false
+        if funcs.searchArray(msg.envelope.user.id, usrarr) == true
+            getidx = funcs.findKeyIndex(usrarr, 'id', msg.envelope.user.id)
+            if getidx != null
+                if usrarr[getidx].leave == true and usrarr[getidx].join == false
+                    usrarr[getidx].join = true
+                    robot.brain.data["GOSU-hi-script"] = usrarr
+                    robot.brain.save()
+                    msg.send msg.random hiarr
+        else if funcs.searchArray(msg.envelope.user.id, usrarr) == false
             usrarr.push({id: msg.envelope.user.id, join: true, leave: false})
             robot.brain.data["GOSU-hi-script"] = usrarr
             robot.brain.save()
@@ -47,8 +55,15 @@ module.exports = (robot) ->
 
     robot.hear /user_left/i, (msg) ->
         getidx = funcs.findKeyIndex(usrarr, 'id', msg.envelope.user.id)
-        if usrarr[getidx].leave == false
-            usrarr[getidx].leave = true
-            robot.brain.data["GOSU-hi-script"] = usrarr
-            robot.brain.save()
-            msg.send msg.random byearr
+
+        if getidx != null
+            if usrarr[getidx].leave == false
+                usrarr[getidx].leave = true
+                robot.brain.data["GOSU-hi-script"] = usrarr
+                robot.brain.save()
+                msg.send msg.random byearr
+        else
+                usrarr.push({id: msg.envelope.user.id, join: false, leave: true})
+                robot.brain.data["GOSU-hi-script"] = usrarr
+                robot.brain.save()
+                msg.send msg.random byearr
